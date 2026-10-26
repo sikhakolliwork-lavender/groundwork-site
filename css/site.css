@@ -128,7 +128,8 @@ table.compare { width: 100%; min-width: 34rem; border-collapse: collapse; font-s
 /* Contact */
 .contact { display: grid; gap: var(--space-xs); border-top: 1px solid var(--line); padding-top: var(--space-s); }
 .email-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xs); }
-.email { font: 600 var(--step-1)/1.2 var(--font-display); user-select: all; overflow-wrap: anywhere; min-width: 0; }
+.email { font: 600 var(--step-1)/1.2 var(--font-display); color: var(--fg); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em; overflow-wrap: anywhere; min-width: 0; }
+.email:hover { color: var(--link); }
 .copy-btn { font: 600 var(--step--1)/1 var(--font-display); border: 1.5px solid color-mix(in srgb, var(--fg) 45%, transparent); color: var(--fg); background: transparent; border-radius: 999px; padding: 0.55em 1em; cursor: pointer; }
 .contact ol { margin: 0; padding-left: 1.2em; font-size: var(--step--1); color: color-mix(in srgb, var(--fg) 84%, transparent); display: grid; gap: var(--space-3xs); }
 
