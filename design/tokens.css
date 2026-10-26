@@ -1,0 +1,90 @@
+/* Groundwork design tokens — the single source for type, colour and spacing.
+   Every page imports this file; components use these variables, never raw values.
+   Decisions are logged in DESIGN.md. */
+
+@import url("https://api.fontshare.com/v2/css?f[]=synonym@1&f[]=amulya@1,2&display=swap");
+
+:root {
+  /* Type — decided 2026-10-26 */
+  --font-display: "Synonym", system-ui, sans-serif;  /* headings, numbers, nav */
+  --font-body: "Amulya", Georgia, serif;             /* running text; has real italics */
+
+  /* Colour is derived, not picked: tools/palette.py searches hues against readability, colour-blind
+     separation and graph-mark contrast, in OKLCH. Rationale and the validation table: DESIGN.md → Colour.
+     Chromatic colour is reserved for data (metric = blue, decision = amber). Everything else is ink and paper. */
+
+  /* Light theme (default). Contrast vs --bg in brackets: WCAG ratio · APCA Lc. */
+  --bg: #f5f7f9;          /* oklch(0.975 0.004 255) paper; not pure white, to cut glare */
+  --surface: #fcfdff;     /* oklch(0.995 0.002 255) */
+  --fg: #181f27;          /* oklch(0.235 0.018 255) ink         [15.5:1 · Lc 99] */
+  --muted: #555b64;       /* oklch(0.47 0.016 255)              [6.3:1 · Lc 79] */
+  --line: #d4d8dd;        /* oklch(0.88 0.008 255) hairlines only */
+  --link: #2e4fa2;        /* metric hue pushed to text strength  [7.1:1 · Lc 81] */
+  --metric: #5b89f6;      /* oklch(0.65 0.170 265) graph marks   [3.1:1] */
+  --decision: #d17400;    /* oklch(0.65 0.153 60)  graph marks   [3.1:1] */
+
+  /* Graph colours as "r,g,b" so the canvas can apply its own alpha. */
+  --g-metric: 91,137,246;
+  --g-decision: 209,116,0;
+  --g-hub: 24,31,39;
+  --g-other: 85,91,100;
+  --g-pulse: 24,31,39;
+  --g-edge: 24,31,39;
+  --g-edge-a: 0.09;       /* edges are ink at low alpha */
+  --g-other-a: 0.5;
+  color-scheme: light;
+}
+
+/* Dark theme: same hues; only lightness moves. Follows the OS unless the visitor picks a theme. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1319;        /* oklch(0.185 0.014 255) not pure black, so light text doesn't smear */
+    --surface: #171c23;
+    --fg: #e6eaef;        /* [15.4:1 · Lc 93] not pure white, for the same reason */
+    --muted: #b5bbc2;     /* [9.6:1 · Lc 65] */
+    --line: #2d333b;
+    --link: #90b3ff;      /* [8.9:1 · Lc 61] */
+    --metric: #5886f2;    /* [5.4:1] */
+    --decision: #dd7c00;  /* [6.2:1] */
+    --g-metric: 88,134,242; --g-decision: 221,124,0; --g-hub: 230,234,239; --g-other: 181,187,194;
+    --g-pulse: 230,234,239; --g-edge: 230,234,239; --g-edge-a: 0.075; --g-other-a: 0.45;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1319; --surface: #171c23; --fg: #e6eaef; --muted: #b5bbc2; --line: #2d333b;
+  --link: #90b3ff; --metric: #5886f2; --decision: #dd7c00;
+  --g-metric: 88,134,242; --g-decision: 221,124,0; --g-hub: 230,234,239; --g-other: 181,187,194;
+  --g-pulse: 230,234,239; --g-edge: 230,234,239; --g-edge-a: 0.075; --g-other-a: 0.45;
+  color-scheme: dark;
+}
+
+/* Fluid type and space scales (Utopia method), 2026-10-26.
+   Phone 360px → desktop 1280px; sizes grow smoothly in between.
+   Type: body 17px at ratio 1.2 on phones → 20px at ratio 1.25 on desktop.
+   Use the steps, never raw font sizes or margins. */
+:root {
+  --step--2: clamp(0.7378rem, 0.7135rem + 0.1081vw, 0.8rem);     /* fine print */
+  --step--1: clamp(0.8854rem, 0.8406rem + 0.1993vw, 1rem);       /* labels, captions */
+  --step-0: clamp(1.062rem, 0.9891rem + 0.3261vw, 1.25rem);      /* body text */
+  --step-1: clamp(1.275rem, 1.162rem + 0.5vw, 1.562rem);         /* lede, h3 */
+  --step-2: clamp(1.53rem, 1.364rem + 0.7359vw, 1.953rem);       /* h3 large */
+  --step-3: clamp(1.836rem, 1.599rem + 1.053vw, 2.441rem);       /* h2 */
+  --step-4: clamp(2.203rem, 1.871rem + 1.476vw, 3.052rem);       /* big numbers */
+  --step-5: clamp(2.644rem, 2.186rem + 2.036vw, 3.815rem);       /* h1 */
+
+  --space-3xs: clamp(0.2656rem, 0.2473rem + 0.08152vw, 0.3125rem);
+  --space-2xs: clamp(0.5312rem, 0.4946rem + 0.163vw, 0.625rem);
+  --space-xs: clamp(0.7969rem, 0.7418rem + 0.2446vw, 0.9375rem);
+  --space-s: clamp(1.062rem, 0.9891rem + 0.3261vw, 1.25rem);
+  --space-m: clamp(1.594rem, 1.484rem + 0.4891vw, 1.875rem);
+  --space-l: clamp(2.125rem, 1.978rem + 0.6522vw, 2.5rem);
+  --space-xl: clamp(3.188rem, 2.967rem + 0.9783vw, 3.75rem);
+  --space-2xl: clamp(4.25rem, 3.957rem + 1.304vw, 5rem);
+  --space-3xl: clamp(6.375rem, 5.935rem + 1.957vw, 7.5rem);
+  /* One-up pairs: stretch further between phone and desktop (section padding, gutters) */
+  --space-s-l: clamp(1.062rem, 0.5rem + 2.5vw, 2.5rem);
+  --space-m-xl: clamp(1.594rem, 0.75rem + 3.75vw, 3.75rem);
+  --space-l-2xl: clamp(2.125rem, 1rem + 5vw, 5rem);
+  --space-xl-3xl: clamp(3.188rem, 1.5rem + 7.5vw, 7.5rem);
+}

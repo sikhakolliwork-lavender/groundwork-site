@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Groundwork</title>
+<meta name="description" content="Groundwork builds context engines for Series A–B startups: your metric definitions, decisions and data traps, written down once and read by AI on every question, so your team gets answers finance would sign off on.">
+<meta name="robots" content="noindex, nofollow">  <!-- draft for review; remove at launch -->
+<meta name="theme-color" content="#f5f7f9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f1319" media="(prefers-color-scheme: dark)">
+<script>
+  // Apply a saved theme before first paint, so there is no flash of the wrong one.
+  try { const t = localStorage.getItem("gw-theme"); if (t === "light" || t === "dark") document.documentElement.dataset.theme = t; } catch (e) {}
+</script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23181f27'/%3E%3Cpath d='M9 22 16 10 23 20' stroke='%23e6eaef' stroke-opacity='.45' stroke-width='1.6' fill='none'/%3E%3Ccircle cx='9' cy='22' r='3.2' fill='%235886f2'/%3E%3Ccircle cx='16' cy='10' r='3.6' fill='%23e6eaef'/%3E%3Ccircle cx='23' cy='20' r='3.2' fill='%23dd7c00'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="stylesheet" href="design/tokens.css">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<canvas id="graph" data-src="data/graph.json" aria-hidden="true"></canvas>
+<div class="scrim" aria-hidden="true"></div>
+
+<header class="site-header">
+  <a class="wordmark" href="#top" aria-label="Groundwork, back to top">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M9 22 16 10 23 20" stroke="currentColor" stroke-opacity=".4" stroke-width="1.6" fill="none"/><circle cx="9" cy="22" r="3.2" fill="var(--metric)"/><circle cx="16" cy="10" r="3.6" fill="currentColor"/><circle cx="23" cy="20" r="3.2" fill="var(--decision)"/></svg>
+    Groundwork
+  </a>
+  <nav class="site-nav" aria-label="Primary">
+    <a href="#build">What we build</a>
+    <a href="#proof">Proof</a>
+    <a href="#engagement">How it runs</a>
+    <a href="#platform">Platform</a>
+    <a href="#team">Team</a>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch colour theme">
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+    </button>
+    <a class="btn" href="#contact">Book a context audit</a>
+  </nav>
+</header>
+
+<main>
+  <!-- 1. Whole graph -->
+  <section class="stop" id="top" data-stop="overview" data-label="Start">
+    <div class="copy">
+      <span class="eyebrow">Context engines for Series A–B startups</span>
+      <h1>Give everyone at your startup an analyst that knows your business.</h1>
+      <p class="lede">Behind this page is one company's real context engine: 788 notes and 3,762 links, written over six months. We build these for your company, then connect them to Claude, so your team gets the numbers your finance team would sign off on.</p>
+      <div class="actions">
+        <a class="btn" href="#contact">Book a context audit</a>
+        <a class="btn ghost" href="#problem">See how it works</a>
+      </div>
+      <p class="note">Built and run in production by our co-founder's 8-person data team.</p>
+    </div>
+  </section>
+
+  <!-- 2. Two conflicting definitions -->
+  <section class="stop" id="problem" data-stop="conflict" data-label="Why AI gets it wrong">
+    <div class="copy">
+      <span class="eyebrow">Why AI gets your numbers wrong</span>
+      <h2>Two teams. Two definitions of discount.</h2>
+      <p>An AI tool can read your schema. It can't read the Slack thread where finance and growth agreed what discount means. So it picks one, and nobody notices.</p>
+      <ul class="rows">
+        <li><span class="tag">Definitions</span><div><h3>The same word means two numbers</h3><p>Discount, active user, churn. Each team has its own formula, a few percent apart on every row.</p></div></li>
+        <li><span class="tag">Known scars</span><div><h3>Your data has history</h3><p>A week of missing refunds. A status change halfway through a quarter. Your analysts route around these from memory. A model can't.</p></div></li>
+        <li><span class="tag">Schema traps</span><div><h3>Joins fail quietly</h3><p>IDs stored as text in one table and numbers in another. UTC timestamps in an IST business. The totals still look plausible.</p></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 3. Inside one area -->
+  <section class="stop" id="build" data-stop="area" data-area="Retention" data-emphasis="types" data-label="What we build">
+    <div class="copy">
+      <span class="eyebrow">What we build</span>
+      <h2>A context engine, in plain files you own.</h2>
+      <p>We write down what your best analyst knows and connect it to the AI your team already uses. It lives in your git repository as Markdown and Python, so there's nothing to migrate later and nothing to lose if you stop working with us.</p>
+      <ul class="rows">
+        <li><span class="tag">metrics/ decisions/</span><div><h3>Context notes</h3><p>One note per metric, decision and data trap, each with an owner and a date. Old definitions are marked superseded, never deleted.</p></div></li>
+        <li><span class="tag">CLAUDE.md</span><div><h3>Rules for the AI</h3><p>Ask when two definitions conflict. Never mix internal and investor numbers. Nothing ships without a person signing off.</p></div></li>
+        <li><span class="tag">lib/</span><div><h3>A tested query layer</h3><p>Joins, time zones and filters written once, so every answer starts from the same base tables.</p></div></li>
+        <li><span class="tag">checks</span><div><h3>Upkeep</h3><p>Checks catch stale notes, broken links and source tables that stopped updating, before a wrong number goes out.</p></div></li>
+      </ul>
+      <div class="key"><span><i style="background:var(--metric)"></i>Metric definitions</span><span><i style="background:var(--decision)"></i>Decisions, with the reason</span></div>
+      <p class="note">On screen: the Retention area of the real engine.</p>
+    </div>
+  </section>
+
+  <!-- 4. The vault growing -->
+  <section class="stop tall" id="proof" data-stop="growth" data-label="Proof">
+    <div class="copy">
+      <span class="eyebrow">Proof</span>
+      <h2>Built one note at a time. Then the requests stopped.</h2>
+      <p>Our co-founder built this engine as Head of Analytics at a venture-backed Indian consumer startup, from the first note in April 2026 to 788 by October. Keep scrolling to watch it grow.</p>
+      <dl class="ledger">
+        <div class="head"><dt>For an 8-person data team</dt><dd class="before">Before</dd><dd class="after">After</dd></div>
+        <div><dt>Ad-hoc requests per analyst, per day</dt><dd class="before">4+</dd><dd class="after">under 1</dd></div>
+        <div><dt>Time to answer a business question</dt><dd class="before">3–4 hours</dd><dd class="after">~10 min</dd></div>
+        <div><dt>The same, at top priority</dt><dd class="before">1–2 hours</dd><dd class="after">~10 min</dd></div>
+        <div><dt>Business people answering their own questions</dt><dd class="before">none</dd><dd class="after">~15</dd></div>
+      </dl>
+      <div class="facts"><span><b>13</b> areas, each with an owner</span><span><b>60</b> dashboards</span><span><b>130+</b> scheduled reports</span><span><b>10+</b> people contributing</span></div>
+    </div>
+  </section>
+
+  <!-- 5. Engagement: the most-asked areas -->
+  <section class="stop" id="engagement" data-stop="areas" data-areas="Revenue,Retention,Acquisition" data-label="How it runs">
+    <div class="copy">
+      <span class="eyebrow">How an engagement runs</span>
+      <h2>Answers you can trust in three weeks. A self-serve team in eight.</h2>
+      <p>We start with the two or three areas your team asks about most, and add the rest once those hold up.</p>
+      <ol class="rows">
+        <li><span class="tag">Week 0 · free</span><div><h3>Context audit</h3><p>Send us 20 questions your team asked last month. We run them through an AI on your data and show you which answers come back wrong, and why.</p></div></li>
+        <li><span class="tag">Weeks 1–3</span><div><h3>Context sprint</h3><p>We interview the people who own your numbers and build the engine for your most-asked areas. The finish line is those 20 questions answered correctly.</p></div></li>
+        <li><span class="tag">Weeks 4–8</span><div><h3>Self-serve rollout</h3><p>Your business team starts asking directly. The most common questions become dashboards and scheduled sheets, and area owners learn to keep their notes current.</p></div></li>
+        <li><span class="tag muted">Ongoing</span><div><h3>Upkeep</h3><p>A monthly retainer to add areas, fix drifted definitions and re-run your question set after every change.</p></div></li>
+      </ol>
+      <p class="note">Fixed fee per phase, quoted after the audit.</p>
+    </div>
+  </section>
+
+  <!-- 6. Why not a platform -->
+  <section class="stop" id="compare" data-stop="quiet" data-label="Why not a platform">
+    <div class="copy wide">
+      <span class="eyebrow">Why not buy a context platform?</span>
+      <h2>Context platforms are built for enterprises with a governance team. You have three analysts and a fundraise.</h2>
+      <div class="compare-wrap">
+        <table class="compare">
+          <thead><tr><th scope="col"></th><th scope="col">Enterprise platform</th><th scope="col" class="us">Groundwork</th></tr></thead>
+          <tbody>
+            <tr><td>Who does the work</td><td>Your team, inside their software</td><td class="us">We write the context with your people</td></tr>
+            <tr><td>Where context lives</td><td>In their product</td><td class="us">Plain files in your own repository</td></tr>
+            <tr><td>Built for</td><td>Large companies, many data systems</td><td class="us">50–500 person startups, one warehouse</td></tr>
+            <tr><td>First trusted answers</td><td>After procurement and rollout</td><td class="us">End of week three</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Platform -->
+  <section class="stop" id="platform" data-stop="area" data-area="Data platform" data-emphasis="tests" data-hud="Data platform|checking every link" data-label="Platform">
+    <div class="copy">
+      <span class="badge">Early access · 2027</span>
+      <h2>Every link, checked.</h2>
+      <p>We're turning what we build by hand into software. Each feature fixes something we ran into running a context engine in production. Service clients get it first.</p>
+      <ul class="rows">
+        <li><span class="tag muted">Shared keys log every query as one person</span><div><h3>Per-person access</h3><p>Context served to Claude, ChatGPT and Slack over MCP, with each person's own permissions and a record of who asked what.</p></div></li>
+        <li><span class="tag muted">Correctness rested on one person's review</span><div><h3>Answer tests</h3><p>Your real questions become a test suite with known answers, re-run every time a definition or table changes.</p></div></li>
+        <li><span class="tag muted">A report can fail for weeks unnoticed</span><div><h3>Drift and freshness alerts</h3><p>Know when a source table stops updating, a schema changes or two notes start to disagree.</p></div></li>
+        <li><span class="tag muted">Writing notes from scratch is the slow part</span><div><h3>Context from your history</h3><p>Draft notes from your existing SQL, dashboards and Slack threads, so owners review definitions instead of writing them.</p></div></li>
+      </ul>
+      <a class="btn ghost" href="#contact">Ask for early access</a>
+    </div>
+  </section>
+
+  <!-- 8. Team -->
+  <section class="stop" id="team" data-stop="quiet" data-hud="The team|two co-founders" data-label="Team">
+    <div class="copy wide">
+      <span class="eyebrow">Team</span>
+      <h2>We've run the data desk ourselves.</h2>
+      <div class="people">
+        <div class="person">
+          <h3>Sravan Sikhakolli</h3>
+          <span class="role">Co-founder</span>
+          <p>Head of Analytics at a venture-backed consumer startup and the builder of the context engine on this page. Previously at OYO and Saathi.</p>
+        </div>
+        <div class="person">
+          <h3>Armaan Singh Pandher</h3>
+          <span class="role">Co-founder</span>
+          <p><span class="placeholder">Bio to come</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. FAQ -->
+  <section class="stop" id="faq" data-stop="quiet" data-hud="Questions|before you book" data-label="Questions">
+    <div class="copy wide">
+      <span class="eyebrow">Questions founders ask</span>
+      <h2>Before you book</h2>
+      <div class="faq">
+        <details><summary>Do you need access to our data?</summary><p>Read-only access to your warehouse during the sprint, with a per-person login you can revoke. We never need write access, and the context notes hold definitions, not customer data.</p></details>
+        <details><summary>Which warehouses do you work with?</summary><p>We've run this in production on BigQuery, Postgres, MySQL and Google Sheets. Snowflake and Databricks work the same way; we confirm the details in the audit.</p></details>
+        <details><summary>Is this tied to Claude?</summary><p>We set teams up on Claude because it handles large context well. The notes are plain Markdown, so any AI tool that can read files or connect over MCP can use them.</p></details>
+        <details><summary>What happens when we stop working with you?</summary><p>You keep everything. It lives in your repository and your area owners know how to update it. The retainer pays for new areas and upkeep, not for access.</p></details>
+        <details><summary>We already have a semantic layer. Do we need this?</summary><p>A semantic layer defines how a metric is computed. It doesn't record why it changed, which data to distrust or what to do when two teams disagree. We build on top of yours.</p></details>
+        <details><summary>Can it help with fundraising?</summary><p>Yes. We've built an investor data room with a context layer: exports, a dictionary for every file and documented data caveats, so an analyst on the other side can use AI on it without misreading it.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. Contact -->
+  <section class="stop" id="contact" data-stop="cta" data-hud="Your company|not written down yet" data-label="Contact">
+    <div class="copy">
+      <h2>Your company has a graph like this. It just isn't written down yet.</h2>
+      <p>Send us the 20 questions your team asked last month. We'll show you which ones an AI gets wrong and what it would take to fix them. Free, 45 minutes, no deck.</p>
+      <div class="contact">
+        <span class="eyebrow">Email the founders</span>
+        <div class="email-row">
+          <span class="email" id="email"><span class="placeholder">founders@your-domain.com</span></span>
+          <button class="copy-btn" id="copy-email" type="button">Copy</button>
+        </div>
+        <ol>
+          <li>Your company and stage</li>
+          <li>Your warehouse</li>
+          <li>A list of real questions. Rough is fine.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>© 2026 Groundwork</span>
+  <span>The graph behind this page is a real context engine, anonymised. No titles or content are included.</span>
+</footer>
+
+<div class="hud" aria-hidden="true"><b id="hud-name">Whole company</b><span id="hud-sub">788 notes · 13 areas</span></div>
+<nav class="dots" aria-label="Sections"></nav>
+
+<script src="js/graph.js" defer></script>
+<script src="js/site.js" defer></script>
+</body>
+</html>

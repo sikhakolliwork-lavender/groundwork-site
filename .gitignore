@@ -1,0 +1,6 @@
+# Superseded work and the vault-graph builder stay local: the builder names the source vault's internal areas.
+archive/
+tools/build_graph.py
+.DS_Store
+__pycache__/
+*.pyc
