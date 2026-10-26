@@ -26,7 +26,7 @@ a { color: var(--link); }
 .site-nav { display: flex; align-items: center; gap: var(--space-m); font: 500 var(--step--1)/1 var(--font-display); }
 .site-nav a { color: var(--muted); text-decoration: none; }
 .site-nav a:hover { color: var(--fg); }
-.site-nav .btn { color: var(--bg); white-space: nowrap; }
+.site-nav .btn { color: var(--bg); white-space: nowrap; display: inline-block; }  /* inline-block: no flex gap between the words */
 @media (max-width: 520px) { .hide-sm { display: none; } .site-nav { gap: var(--space-xs); } }
 .theme-toggle { display: grid; place-items: center; width: 2.5rem; height: 2.5rem; border-radius: 50%; border: 1px solid var(--line); background: transparent; color: var(--fg); cursor: pointer; }
 .theme-toggle:hover { border-color: var(--muted); }
@@ -105,6 +105,8 @@ table.compare { width: 100%; min-width: 34rem; border-collapse: collapse; font-s
 .compare thead th.us { color: var(--link); }
 .compare td:first-child { color: var(--muted); font-family: var(--font-display); width: 26%; }
 .compare td.us { color: var(--fg); }
+.compare tr:last-child td { border-top: 1.5px solid var(--fg); }
+.compare tr:last-child td.us:first-child { color: var(--fg); font-weight: 600; }
 
 /* Team */
 .people { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-m); }

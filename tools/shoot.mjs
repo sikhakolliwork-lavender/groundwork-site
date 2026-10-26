@@ -1,8 +1,9 @@
 // Usage: node shoot.mjs <url> <outdir> <width> <height> [light|dark]
 import { spawn } from "node:child_process";
+import fs0 from "node:fs"; import os from "node:os";   // fresh browser profile each run, so nothing is served from cache
 const [url, out, w = "1440", h = "900", scheme = "light"] = process.argv.slice(2);
 const chrome = spawn("/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-  ["--headless=new", "--remote-debugging-port=9333", `--user-data-dir=${out}/../chrome-prof`, `--window-size=${w},${h}`, "--hide-scrollbars", "about:blank"], { stdio: "ignore" });
+  ["--headless=new", "--remote-debugging-port=9333", `--user-data-dir=${fs0.mkdtempSync(os.tmpdir() + "/shoot-")}`, `--window-size=${w},${h}`, "--hide-scrollbars", "about:blank"], { stdio: "ignore" });
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 let ws;
 for (let i = 0; i < 40; i++) { try { const l = await (await fetch("http://127.0.0.1:9333/json")).json(); const p = l.find(t => t.type === "page"); if (p) { ws = new WebSocket(p.webSocketDebuggerUrl); break; } } catch {} await sleep(250); }
