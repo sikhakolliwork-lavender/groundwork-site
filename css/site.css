@@ -26,7 +26,8 @@ a { color: var(--link); }
 .site-nav { display: flex; align-items: center; gap: var(--space-m); font: 500 var(--step--1)/1 var(--font-display); }
 .site-nav a { color: var(--muted); text-decoration: none; }
 .site-nav a:hover { color: var(--fg); }
-.site-nav .btn { color: var(--bg); }
+.site-nav .btn { color: var(--bg); white-space: nowrap; }
+@media (max-width: 520px) { .hide-sm { display: none; } .site-nav { gap: var(--space-xs); } }
 .theme-toggle { display: grid; place-items: center; width: 2.5rem; height: 2.5rem; border-radius: 50%; border: 1px solid var(--line); background: transparent; color: var(--fg); cursor: pointer; }
 .theme-toggle:hover { border-color: var(--muted); }
 .theme-toggle svg { width: 1.1rem; height: 1.1rem; }
@@ -151,7 +152,7 @@ footer { position: relative; z-index: 2; display: flex; flex-wrap: wrap; justify
   .stop { min-height: 110vh; padding-block: 40vh 12vh; }
   .stop.tall { padding-block: 40vh 60vh; }
   .stop.tall > .copy { position: static; }   /* too tall to pin on a phone; the graph still grows with the scroll */
-  .hud { left: max(var(--space-s), env(safe-area-inset-left, 0px)); right: auto; text-align: left; top: calc(var(--space-2xl) + env(safe-area-inset-top, 0px)); bottom: auto;
+  .hud { left: max(var(--space-s), env(safe-area-inset-left, 0px)); right: auto; text-align: left; top: calc(5rem + env(safe-area-inset-top, 0px)); bottom: auto;
     background: color-mix(in srgb, var(--bg) 85%, transparent); padding: var(--space-3xs) var(--space-2xs); border-radius: 8px; }
   .hud b { font-size: var(--step-0); }
   .dots { display: none; }
